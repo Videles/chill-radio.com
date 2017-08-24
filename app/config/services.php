@@ -30,32 +30,47 @@ $di->setShared('url', function () {
 /**
  * Setting up the view component
  */
-$di->setShared('view', function () {
-    $config = $this->getConfig();
+ $di->setShared('view', function () {
+     $config = $this->getConfig();
 
-    $view = new View();
-    $view->setDI($this);
-    $view->setViewsDir($config->application->viewsDir);
+     $view = new View();
+     $view->setDI($this);
+     $view->setViewsDir($config->application->viewsDir);
 
-    $view->registerEngines([
-        '.volt' => function ($view) {
-            $config = $this->getConfig();
+     $view->registerEngines([
+         '.volt' => function ($view) {
+             $config = $this->getConfig();
 
-            $volt = new VoltEngine($view, $this);
+             $volt = new VoltEngine($view, $this);
 
-            $volt->setOptions([
-                'compiledPath' => $config->application->cacheDir,
-                'compiledSeparator' => '_'
-            ]);
+             if($config->settings->development === false) {
+                 $volt->setOptions([
+                     'compiledPath' => $config->application->cacheDir,
+                     'compiledSeparator' => '_',
+                     'compileAlways' => TRUE // use if problems with updating files exist
+                 ]);
 
-            return $volt;
-        },
-        '.phtml' => PhpEngine::class
+                 // Alternative to force clear cache and re-compile files
+                 // array_map('unlink', glob($config->application->cacheDir . 'volt/*.php'));
+                 // $volt->setOptions(array(
+                 //     'compileAlways' => TRUE,
+                 // ));
 
-    ]);
+             }
 
-    return $view;
-});
+             // Custom volt functions
+             $compiler = $volt->getCompiler();
+             $compiler->addFunction('split', 'explode');
+
+             return $volt;
+         },
+         '.phtml' => PhpEngine::class // php >= 5.5 only
+         //'.phtml' => 'Phalcon\Mvc\View\Engine\Php' // php <= php 5.4 work-around
+
+     ]);
+
+     return $view;
+ });
 
 /**
  * Database connection is created based in the parameters defined in the configuration file
