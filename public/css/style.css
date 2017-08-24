@@ -1,0 +1,131 @@
+/* Palette de couleur : https://www.design-seeds.com/in-nature/succulents/succulent-hues-22/ */
+
+.hero.is-fullheight .hero-body > .container {
+	margin-top: -8%;
+}
+
+.hero.is-success {
+	background-color: #444F50;
+	background: url(../img/background-min.jpg);
+}
+
+.hero.is-success .title,
+.hero.is-success .subtitle,
+.hero.is-success .container-player {
+	text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.hero.is-success .title,
+.hero.is-success .subtitle {
+	color: #DCDCD1;
+}
+
+.hero.is-success .title span {
+	font-weight: bold;
+	font-size: 3em;
+}
+
+.container-player span {
+  display: inline-block;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  height: 50px;
+  position: relative;
+}
+
+.player-control {
+	height: 50px;
+	width: 50px;
+	background: #929BCA;
+	display: inline-block;
+	margin-right: -4px;
+	cursor: pointer;
+}
+
+.player-control.play:before {
+    content: " ";
+    z-index: 2;
+    border: 10px solid transparent;
+    border-left-width: 14px;
+    border-left-color: white;
+    position: absolute;
+    margin-top: 16px;
+    margin-left: -5px;
+}
+
+.player-control.stop:before {
+	content: " ";
+    z-index: 2;
+    border-left: 7px solid white;
+    border-right: 7px solid white;
+    position: absolute;
+    margin-top: 18px;
+    margin-left: -7px;
+    height: 15px;
+    width: 16px;
+    display: inline-block;
+}
+
+.player-text {
+    text-align: left;
+    font-weight: 100;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    color: #DCDCD1;
+}
+
+
+/* RANGE */
+
+input[type="range"] {
+	right: 0;
+    position: absolute;
+    top: 65px;
+    -webkit-appearance: none;
+}
+input[type=range]:focus {
+  	outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  	height: 1.4px;
+  	cursor: pointer;
+  	background: #929BCA;
+    box-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+input[type=range]::-moz-range-track {
+  	height: 1.4px;
+  	cursor: pointer;
+  	background: #929BCA;
+    box-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+input[type=range]::-webkit-slider-thumb {
+  	height: 15px;
+  	width: 15px;
+  	border-radius: 50px;
+  	background: white;
+  	cursor: pointer;
+    -webkit-appearance: none;
+  	margin-top: -6.4px;
+  	box-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+input[type=range]::-moz-range-thumb {
+  	height: 15px;
+  	width: 15px;
+  	border-radius: 50px;
+  	background: white;
+  	cursor: pointer;
+    -webkit-appearance: none;
+  	margin-top: -6.4px;
+  	box-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 1192px) {
+  canvas {
+    width: calc(100% - 51px);
+    height: 50px;
+  }
+  .container-player span {
+    width: 80%;
+  }
+}
+
